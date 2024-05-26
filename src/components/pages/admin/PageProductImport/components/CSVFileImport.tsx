@@ -31,11 +31,15 @@ export default function CSVFileImport({ url, title }: CSVFileImportProps) {
     }
     // Get the presigned URL
     try {
+      const tokenFromLocalStorage = localStorage.getItem("authorization_token");
       const response = await axios({
         method: "GET",
         url,
         params: {
           name: encodeURIComponent(file.name),
+        },
+        headers: {
+          Authorization: `Basic ${tokenFromLocalStorage}`,
         },
       });
       console.log("File to upload: ", file.name);
