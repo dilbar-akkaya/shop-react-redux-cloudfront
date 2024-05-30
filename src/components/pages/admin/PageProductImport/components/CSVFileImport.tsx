@@ -25,6 +25,7 @@ export default function CSVFileImport({ url, title }: CSVFileImportProps) {
 
   const uploadFile = async () => {
     console.log("uploadFile to", url);
+    console.log(localStorage, "localstorage");
     console.log(localStorage.getItem("authorization_token"), "1tok from local");
     if (!file) {
       console.log("File is undefined");
