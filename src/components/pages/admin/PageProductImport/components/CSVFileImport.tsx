@@ -45,7 +45,7 @@ export default function CSVFileImport({ url, title }: CSVFileImportProps) {
           "Access-Control-Allow-Headers": "Content-Type",
           "Access-Control-Allow-Origin": "*",
           "Access-Control-Allow-Methods": "OPTIONS, POST, GET",
-          Authorization: `Basic ${tokenFromLocalStorage}`,
+          Authorization: `Basic ${localStorage.getItem("authorization_token")}`,
         },
       });
       console.log("File to upload: ", file.name);
