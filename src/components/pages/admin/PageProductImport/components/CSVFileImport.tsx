@@ -51,9 +51,6 @@ export default function CSVFileImport({ url, title }: CSVFileImportProps) {
           name: encodeURIComponent(file.name),
         },
         headers: {
-          "Access-Control-Allow-Headers": "Content-Type",
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "OPTIONS, POST, GET",
           Authorization: `Basic ${localStorage.getItem("authorization_token")}`,
         },
       });
