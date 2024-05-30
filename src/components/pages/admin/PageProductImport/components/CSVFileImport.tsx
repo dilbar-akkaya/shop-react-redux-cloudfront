@@ -24,8 +24,14 @@ export default function CSVFileImport({ url, title }: CSVFileImportProps) {
   };
 
   const uploadFile = async () => {
-    const tokenFromLocalStorage1 = localStorage.getItem("authorization_token");
-    console.log("Токен из Local Storage:", tokenFromLocalStorage1);
+    try {
+      const tokenFromLocalStorage1 = localStorage.getItem(
+        "authorization_token"
+      );
+      console.log("Токен из Local Storage:", tokenFromLocalStorage1);
+    } catch (error) {
+      console.error(error);
+    }
     console.log("uploadFile to", url);
     console.log(localStorage, "localstorage");
     console.log(localStorage.getItem("authorization_token"), "1tok from local");
