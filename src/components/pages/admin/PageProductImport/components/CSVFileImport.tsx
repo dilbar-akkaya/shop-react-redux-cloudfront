@@ -28,13 +28,13 @@ export default function CSVFileImport({ url, title }: CSVFileImportProps) {
     console.log(localStorage.getItem("authorization_token"), "1tok from local");
     if (!file) {
       console.log("File is undefined");
-      return
+      return;
     }
     console.log(localStorage.getItem("authorization_token"), "2tok from local");
     // Get the presigned URL
     const tokenFromLocalStorage = localStorage.getItem("authorization_token");
     console.log("auth token", tokenFromLocalStorage);
-    try { 
+    try {
       const response = await axios({
         method: "GET",
         url,
@@ -42,6 +42,9 @@ export default function CSVFileImport({ url, title }: CSVFileImportProps) {
           name: encodeURIComponent(file.name),
         },
         headers: {
+          "Access-Control-Allow-Headers": "Content-Type",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "OPTIONS, POST, GET",
           Authorization: `Basic ${tokenFromLocalStorage}`,
         },
       });
@@ -52,7 +55,6 @@ export default function CSVFileImport({ url, title }: CSVFileImportProps) {
         body: file,
       });
       console.log("Result: ", result);
-
     } catch (err) {
       console.error(err);
     }
