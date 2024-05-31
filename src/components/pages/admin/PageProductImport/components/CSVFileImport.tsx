@@ -24,25 +24,13 @@ export default function CSVFileImport({ url, title }: CSVFileImportProps) {
   };
 
   const uploadFile = async () => {
-    try {
-      const tokenFromLocalStorage1 = localStorage.getItem(
-        "authorization_token"
-      );
-      console.log("Токен из Local Storage:", tokenFromLocalStorage1);
-    } catch (error) {
-      console.error(error);
-    }
     console.log("uploadFile to", url);
-    console.log(localStorage, "localstorage");
-    console.log(localStorage.getItem("authorization_token"), "1tok from local");
     if (!file) {
       console.log("File is undefined");
       return;
     }
-    console.log(localStorage.getItem("authorization_token"), "2tok from local");
     // Get the presigned URL
     const tokenFromLocalStorage = localStorage.getItem("authorization_token");
-    console.log("auth token", tokenFromLocalStorage);
     try {
       const response = await axios({
         method: "GET",
@@ -51,9 +39,10 @@ export default function CSVFileImport({ url, title }: CSVFileImportProps) {
           name: encodeURIComponent(file.name),
         },
         headers: {
-          Authorization: `Basic ${localStorage.getItem("authorization_token")}`,
+          Authorization: `Basic ${tokenFromLocalStorage}`,
         },
       });
+
       console.log("File to upload: ", file.name);
       console.log("Uploading to: ", response.data);
       const result = await fetch(response.data, {
